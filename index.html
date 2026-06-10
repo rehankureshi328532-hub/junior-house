@@ -1,946 +1,942 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Junior Kids House - Cute & Stylish Kids Wear</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #f2f2f2;
-            color: #333;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            background: #f8f9fb;
-            min-height: 100vh;
-            position: relative;
-            padding-bottom: 100px;
-        }
-        /* Banner */
-        .banner {
-            width: 100%;
-            height: 240px;
-            background: #ddd;
-            position: relative;
-            overflow: hidden;
-        }
-        .banner-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .banner-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .share-btn {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.95);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            text-decoration: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        /* Profile Header */
-        .profile-header {
-            text-align: center;
-            padding: 0 20px 20px;
-            position: relative;
-        }
-        .logo-wrapper {
-            width: 120px;
-            height: 120px;
-            background: #fff;
-            border-radius: 50%;
-            margin: -60px auto 14px;
-            padding: 5px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            position: relative;
-            z-index: 2;
-        }
-        .logo {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #fff;
-            border: 2px solid #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #10b981;
-            font-size: 32px;
-            font-weight: 800;
-            overflow: hidden;
-        }
-        .logo img { width: 100%; height: 100%; object-fit: cover; }
-        .business-name {
-            font-size: 26px;
-            font-weight: 800;
-            color: #111;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 6px;
-            letter-spacing: -0.5px;
-        }
-        .verified {
-            color: #3b82f6;
-            font-size: 22px;
-        }
-        .tagline {
-            font-style: italic;
-            color: #666;
-            font-size: 15px;
-            margin-bottom: 14px;
-        }
-        .categories {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-        .category-tag {
-            background: #f3f4f6;
-            color: #666;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-        /* Hours */
-        .hours-box {
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 16px;
-            padding: 14px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 0 20px 24px;
-            font-size: 14px;
-            color: #555;
-            font-weight: 500;
-        }
-        /* Carousel */
-        .carousel-wrap {
-            position: relative;
-            margin: 0 20px 8px;
-        }
-        .carousel {
-            border-radius: 16px;
-            overflow: hidden;
-            height: 200px;
-            background: #e5e7eb;
-            position: relative;
-        }
-        .carousel-slide {
-            width: 100%;
-            height: 100%;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        .carousel-slide.active { display: block; }
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .carousel-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            font-weight: 600;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(1.02); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 36px;
-            height: 36px;
-            background: rgba(255,255,255,0.95);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            color: #333;
-            font-size: 14px;
-            z-index: 2;
-        }
-        .carousel-nav.prev { left: 10px; }
-        .carousel-nav.next { right: 10px; }
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-bottom: 24px;
-        }
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #d1d5db;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .dot.active { background: #10b981; width: 18px; border-radius: 4px; }
-        
-        /* Cards */
-        .card {
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 20px;
-            padding: 22px;
-            margin: 0 20px 20px;
-        }
-        .card-title {
-            font-size: 16px;
-            font-weight: 800;
-            color: #111;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .about-text {
-            color: #555;
-            font-size: 15px;
-            line-height: 1.7;
-        }
-        /* Review */
-        .review-card {
-            text-align: center;
-            padding: 28px 20px;
-        }
-        .stars {
-            color: #fbbf24;
-            font-size: 26px;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-        .review-title {
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #111;
-            font-size: 17px;
-        }
-        .review-subtitle {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 18px;
-        }
-        .google-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            padding: 12px 24px;
-            border-radius: 14px;
-            text-decoration: none;
-            color: #333;
-            font-weight: 700;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            font-size: 15px;
-        }
-        .google-icon {
-            width: 24px; height: 24px; border-radius: 50%;
-            background: conic-gradient(from 180deg at 50% 50%, #EA4335 0deg, #FBBC05 90deg, #34A853 180deg, #4285F4 270deg, #EA4335 360deg);
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; font-weight: bold; font-size: 13px;
-        }
-        /* CTA Button */
-        .cta-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #10b981;
-            color: white;
-            text-decoration: none;
-            padding: 18px 20px;
-            border-radius: 18px;
-            margin: 0 20px 24px;
-            font-weight: 700;
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
-            transition: transform 0.2s;
-        }
-        .cta-btn:active { transform: scale(0.98); }
-        .cta-btn .left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .cta-btn .icon-box {
-            width: 48px;
-            height: 48px;
-            background: rgba(255,255,255,0.25);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-        }
-        .cta-btn .sub {
-            font-size: 11px;
-            opacity: 0.95;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .cta-btn .main {
-            font-size: 17px;
-            font-weight: 700;
-        }
-        
-        /* Section Title */
-        .section-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin: 0 20px 14px;
-        }
-        /* Filter tabs */
-        .filters {
-            display: flex;
-            gap: 10px;
-            margin: 0 20px 18px;
-            overflow-x: auto;
-            padding-bottom: 4px;
-        }
-        .filter-btn {
-            padding: 8px 18px;
-            border-radius: 24px;
-            border: 1px solid #e5e7eb;
-            background: #fff;
-            font-size: 14px;
-            cursor: pointer;
-            white-space: nowrap;
-            color: #666;
-            font-weight: 500;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-        .filter-btn.active {
-            background: #ecfdf5;
-            color: #10b981;
-            border-color: #a7f3d0;
-            font-weight: 700;
-        }
-        /* Service Grid */
-        .service-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin: 0 20px 20px;
-        }
-        .service-card {
-            border: 1px solid #e5e7eb;
-            border-radius: 18px;
-            padding: 18px;
-            background: #fff;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .service-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-        .service-card.hidden { display: none; }
-        .service-badge {
-            display: inline-block;
-            background: #dbeafe;
-            color: #2563eb;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .service-badge.service-badge-green {
-            background: #d1fae5;
-            color: #059669;
-        }
-        .service-name {
-            font-weight: 800;
-            color: #111;
-            margin-bottom: 8px;
-            font-size: 15px;
-            line-height: 1.3;
-        }
-        .service-desc {
-            font-size: 13px;
-            color: #888;
-            margin-bottom: 14px;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .service-price {
-            color: #10b981;
-            font-weight: 800;
-            font-size: 16px;
-        }
-        .explore-all {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: #10b981;
-            font-weight: 700;
-            text-decoration: none;
-            margin: 0 20px 28px;
-            padding: 14px;
-            border: 1.5px dashed #a7f3d0;
-            border-radius: 14px;
-            font-size: 14px;
-            background: #fff;
-            transition: all 0.2s;
-        }
-        .explore-all:hover { background: #ecfdf5; }
-        /* Social & Contact */
-        .link-list {
-            margin: 0 20px 24px;
-        }
-        .link-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 16px;
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 16px;
-            margin-bottom: 10px;
-            text-decoration: none;
-            color: inherit;
-            transition: background 0.2s;
-        }
-        .link-item:active { background: #f9fafb; }
-        .link-item .left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .link-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-        .link-icon.ig { background: #fce7f3; color: #db2777; }
-        .link-icon.fb { background: #dbeafe; color: #2563eb; }
-        .link-icon.x { background: #f3f4f6; color: #111; }
-        .link-icon.wa { background: #d1fae5; color: #10b981; }
-        .link-icon.map { background: #fee2e2; color: #ef4444; }
-        .link-icon.web { background: #e0e7ff; color: #4f46e5; }
-        .link-icon.call { background: #dbeafe; color: #2563eb; }
-        .link-icon.mail { background: #ffedd5; color: #f97316; }
-        .link-text {
-            font-weight: 700;
-            color: #111;
-            font-size: 15px;
-        }
-        .link-arrow {
-            color: #9ca3af;
-            font-size: 14px;
-        }
-        /* Bottom Buttons */
-        .btn-full {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-align: center;
-            padding: 16px;
-            border-radius: 16px;
-            margin: 0 20px 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            width: calc(100% - 40px);
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-        .btn-green {
-            background: #10b981;
-            color: white;
-            box-shadow: 0 6px 20px rgba(16,185,129,0.25);
-        }
-        .btn-green:active { transform: scale(0.98); }
-        .btn-white {
-            background: #fff;
-            color: #111;
-            border: 1px solid #e5e7eb;
-        }
-        .btn-white:active { background: #f9fafb; }
-        .footer-text {
-            text-align: center;
-            font-size: 12px;
-            color: #9ca3af;
-            margin-top: 24px;
-            padding-bottom: 24px;
-        }
-        .footer-text a {
-            color: #10b981;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        /* Floating WhatsApp */
-        .fab-wa {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #10b981;
-            color: white;
-            padding: 14px 24px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 6px 24px rgba(16,185,129,0.4);
-            z-index: 100;
-            font-size: 15px;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            transition: transform 0.2s;
-        }
-        .fab-wa:active { transform: scale(0.95); }
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: #111;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            z-index: 200;
-            white-space: nowrap;
-        }
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-        @media (min-width: 640px) {
-            .container { box-shadow: 0 0 50px rgba(0,0,0,0.1); }
-            body { background: #e5e7eb; }
-        }
-    </style>
-</head>
-<body>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Junior Kids House - Cute & Stylish Kids Wear</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                background-color: #f2f2f2;
+                color: #333;
+                line-height: 1.6;
+            }
+            .container {
+                max-width: 480px;
+                margin: 0 auto;
+                background: #f8f9fb;
+                min-height: 100vh;
+                position: relative;
+                padding-bottom: 100px;
+            }
+            /* Banner */
+    .banner{
+        width:100%;
+        height:260px;
+        overflow:hidden;
+        position:relative;
+        background:#fff;
+    }
 
-<!-- Toast Notification -->
-<div class="toast" id="toast">Link copied to clipboard!</div>
+    .banner-img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        object-position:center;
+        display:block;
+    }
+        
+            .share-btn {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                width: 40px;
+                height: 40px;
+                background: rgba(255,255,255,0.95);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #333;
+                text-decoration: none;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+                border: none;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            /* Profile Header */
+            .profile-header {
+                text-align: center;
+                padding: 0 20px 20px;
+                position: relative;
+            }
+        .logo-wrapper{
+        width:120px;
+        height:120px;
+        background:#fff;
+        border-radius:50%;
+        margin:-40px auto 14px;
+        padding:5px;
+        box-shadow:0 4px 15px rgba(0,0,0,.08);
+        position:relative;
+        z-index:10;
+    }
+            .logo {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: #fff;
+                border: 2px solid #eee;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #10b981;
+                font-size: 32px;
+                font-weight: 800;
+                overflow: hidden;
+            }
+            .logo img { width: 100%; height: 100%; object-fit: cover; }
+            .business-name {
+                font-size: 26px;
+                font-weight: 800;
+                color: #111;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                margin-bottom: 6px;
+                letter-spacing: -0.5px;
+            }
+            .verified {
+                color: #3b82f6;
+                font-size: 22px;
+            }
+            .tagline {
+                font-style: italic;
+                color: #666;
+                font-size: 15px;
+                margin-bottom: 14px;
+            }
+            .categories {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                flex-wrap: wrap;
+                margin-bottom: 16px;
+            }
+            .category-tag {
+                background: #f3f4f6;
+                color: #666;
+                padding: 5px 14px;
+                border-radius: 20px;
+                font-size: 13px;
+                font-weight: 500;
+            }
+            /* Hours */
+            .hours-box {
+                background: #fff;
+                border: 1px solid #e5e7eb;
+                border-radius: 16px;
+                padding: 14px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 0 20px 24px;
+                font-size: 14px;
+                color: #555;
+                font-weight: 500;
+            }
+            /* Carousel */
+            .carousel-wrap {
+                position: relative;
+                margin: 0 20px 8px;
+            }
+            .carousel {
+                border-radius: 16px;
+                overflow: hidden;
+                height: 200px;
+                background: #e5e7eb;
+                position: relative;
+            }
+            .carousel-slide{
+        width:100%;
+        height:100%;
+        display:none;
+    }
 
-<div class="container">
-    <!-- Banner -->
-    <div class="banner">
-        <div class="banner-placeholder">
-            <i class="fas fa-image" style="margin-right:8px;"></i> Add Your Store Banner Photo
-        </div>
+        .carousel-slide.active{
+        display:block;
+    }
+        .carousel-slide img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        object-position:center;
+        display:block;
+    }
+        
+            @keyframes fadeIn {
+                from { opacity: 0; transform: scale(1.02); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            .carousel-nav {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 36px;
+                height: 36px;
+                background: rgba(255,255,255,0.95);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: none;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                color: #333;
+                font-size: 14px;
+                z-index: 2;
+            }
+            .carousel-nav.prev { left: 10px; }
+            .carousel-nav.next { right: 10px; }
+            .carousel-dots {
+                display: flex;
+                justify-content: center;
+                gap: 6px;
+                margin-bottom: 24px;
+            }
+            .dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #d1d5db;
+                transition: all 0.3s;
+                cursor: pointer;
+            }
+            .dot.active { background: #10b981; width: 18px; border-radius: 4px; }
+            
+            /* Cards */
+            .card {
+                background: #fff;
+                border: 1px solid #e5e7eb;
+                border-radius: 20px;
+                padding: 22px;
+                margin: 0 20px 20px;
+            }
+            .card-title {
+                font-size: 16px;
+                font-weight: 800;
+                color: #111;
+                margin-bottom: 12px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .about-text {
+                color: #555;
+                font-size: 15px;
+                line-height: 1.7;
+            }
+            /* Review */
+            .review-card {
+                text-align: center;
+                padding: 28px 20px;
+            }
+            .stars {
+                color: #fbbf24;
+                font-size: 26px;
+                margin-bottom: 10px;
+                letter-spacing: 2px;
+            }
+            .review-title {
+                font-weight: 700;
+                margin-bottom: 6px;
+                color: #111;
+                font-size: 17px;
+            }
+            .review-subtitle {
+                color: #666;
+                font-size: 14px;
+                margin-bottom: 18px;
+            }
+            .google-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                background: #fff;
+                border: 1px solid #e5e7eb;
+                padding: 12px 24px;
+                border-radius: 14px;
+                text-decoration: none;
+                color: #333;
+                font-weight: 700;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+                font-size: 15px;
+            }
+            .google-icon {
+                width: 24px; height: 24px; border-radius: 50%;
+                background: conic-gradient(from 180deg at 50% 50%, #EA4335 0deg, #FBBC05 90deg, #34A853 180deg, #4285F4 270deg, #EA4335 360deg);
+                display: flex; align-items: center; justify-content: center;
+                color: #fff; font-weight: bold; font-size: 13px;
+            }
+            /* CTA Button */
+            .cta-btn {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: #10b981;
+                color: white;
+                text-decoration: none;
+                padding: 18px 20px;
+                border-radius: 18px;
+                margin: 0 20px 24px;
+                font-weight: 700;
+                box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
+                transition: transform 0.2s;
+            }
+            .cta-btn:active { transform: scale(0.98); }
+            .cta-btn .left {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+            }
+            .cta-btn .icon-box {
+                width: 48px;
+                height: 48px;
+                background: rgba(255,255,255,0.25);
+                border-radius: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 22px;
+            }
+            .cta-btn .sub {
+                font-size: 11px;
+                opacity: 0.95;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .cta-btn .main {
+                font-size: 17px;
+                font-weight: 700;
+            }
+            
+            /* Section Title */
+            .section-title {
+                font-size: 12px;
+                font-weight: 700;
+                color: #9ca3af;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                margin: 0 20px 14px;
+            }
+            /* Filter tabs */
+            .filters {
+                display: flex;
+                gap: 10px;
+                margin: 0 20px 18px;
+                overflow-x: auto;
+                padding-bottom: 4px;
+            }
+            .filter-btn {
+                padding: 8px 18px;
+                border-radius: 24px;
+                border: 1px solid #e5e7eb;
+                background: #fff;
+                font-size: 14px;
+                cursor: pointer;
+                white-space: nowrap;
+                color: #666;
+                font-weight: 500;
+                font-family: inherit;
+                transition: all 0.2s;
+            }
+            .filter-btn.active {
+                background: #ecfdf5;
+                color: #10b981;
+                border-color: #a7f3d0;
+                font-weight: 700;
+            }
+            /* Service Grid */
+            .service-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+                margin: 0 20px 20px;
+            }
+            .service-card {
+                border: 1px solid #e5e7eb;
+                border-radius: 18px;
+                padding: 18px;
+                background: #fff;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            .service-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+            .service-card.hidden { display: none; }
+            .service-badge {
+                display: inline-block;
+                background: #dbeafe;
+                color: #2563eb;
+                font-size: 10px;
+                font-weight: 800;
+                padding: 4px 10px;
+                border-radius: 6px;
+                margin-bottom: 10px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .service-badge.service-badge-green {
+                background: #d1fae5;
+                color: #059669;
+            }
+            .service-name {
+                font-weight: 800;
+                color: #111;
+                margin-bottom: 8px;
+                font-size: 15px;
+                line-height: 1.3;
+            }
+            .service-desc {
+                font-size: 13px;
+                color: #888;
+                margin-bottom: 14px;
+                line-height: 1.4;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .service-price {
+                color: #10b981;
+                font-weight: 800;
+                font-size: 16px;
+            }
+            .explore-all {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                color: #10b981;
+                font-weight: 700;
+                text-decoration: none;
+                margin: 0 20px 28px;
+                padding: 14px;
+                border: 1.5px dashed #a7f3d0;
+                border-radius: 14px;
+                font-size: 14px;
+                background: #fff;
+                transition: all 0.2s;
+            }
+            .explore-all:hover { background: #ecfdf5; }
+            /* Social & Contact */
+            .link-list {
+                margin: 0 20px 24px;
+            }
+            .link-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 14px 16px;
+                background: #fff;
+                border: 1px solid #e5e7eb;
+                border-radius: 16px;
+                margin-bottom: 10px;
+                text-decoration: none;
+                color: inherit;
+                transition: background 0.2s;
+            }
+            .link-item:active { background: #f9fafb; }
+            .link-item .left {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+            }
+            .link-icon {
+                width: 42px;
+                height: 42px;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                flex-shrink: 0;
+            }
+            .link-icon.ig { background: #fce7f3; color: #db2777; }
+            .link-icon.fb { background: #dbeafe; color: #2563eb; }
+            .link-icon.x { background: #f3f4f6; color: #111; }
+            .link-icon.wa { background: #d1fae5; color: #10b981; }
+            .link-icon.map { background: #fee2e2; color: #ef4444; }
+            .link-icon.web { background: #e0e7ff; color: #4f46e5; }
+            .link-icon.call { background: #dbeafe; color: #2563eb; }
+            .link-icon.mail { background: #ffedd5; color: #f97316; }
+            .link-text {
+                font-weight: 700;
+                color: #111;
+                font-size: 15px;
+            }
+            .link-arrow {
+                color: #9ca3af;
+                font-size: 14px;
+            }
+            /* Bottom Buttons */
+            .btn-full {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                text-align: center;
+                padding: 16px;
+                border-radius: 16px;
+                margin: 0 20px 12px;
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+                width: calc(100% - 40px);
+                font-family: inherit;
+                transition: all 0.2s;
+            }
+            .btn-green {
+                background: #10b981;
+                color: white;
+                box-shadow: 0 6px 20px rgba(16,185,129,0.25);
+            }
+            .btn-green:active { transform: scale(0.98); }
+            .btn-white {
+                background: #fff;
+                color: #111;
+                border: 1px solid #e5e7eb;
+            }
+            .btn-white:active { background: #f9fafb; }
+            .footer-text {
+                text-align: center;
+                font-size: 12px;
+                color: #9ca3af;
+                margin-top: 24px;
+                padding-bottom: 24px;
+            }
+            .footer-text a {
+                color: #10b981;
+                text-decoration: none;
+                font-weight: 600;
+            }
+            /* Floating WhatsApp */
+            .fab-wa {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #10b981;
+                color: white;
+                padding: 14px 24px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                box-shadow: 0 6px 24px rgba(16,185,129,0.4);
+                z-index: 100;
+                font-size: 15px;
+                border: none;
+                cursor: pointer;
+                font-family: inherit;
+                transition: transform 0.2s;
+            }
+            .fab-wa:active { transform: scale(0.95); }
+            /* Toast Notification */
+            .toast {
+                position: fixed;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%) translateY(20px);
+                background: #111;
+                color: #fff;
+                padding: 12px 24px;
+                border-radius: 12px;
+                font-size: 14px;
+                font-weight: 600;
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+                z-index: 200;
+                white-space: nowrap;
+            }
+            .toast.show {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            @media (min-width: 640px) {
+                .container { box-shadow: 0 0 50px rgba(0,0,0,0.1); }
+                body { background: #e5e7eb; }
+            }
+        </style>
+    </head>
+    <body>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Link copied to clipboard!</div>
+
+    <div class="container">
+        <!-- Banner -->
+        <div class="banner">
+        <img src="banner1.jpg" class="banner-img" alt="Junior Kids House Banner">
+
         <button class="share-btn" onclick="shareProfile()" aria-label="Share">
             <i class="fas fa-share-alt"></i>
         </button>
     </div>
-
-    <!-- Profile Info -->
-    <div class="profile-header">
-        <div class="logo-wrapper">
-            <div class="logo">
-                 <img src="junior.png" alt="Junior Kids House Logo">
+        <!-- Profile Info -->
+        <div class="profile-header">
+            <div class="logo-wrapper">
+                <div class="logo">
+                    <img src="logo.png"  alt="Junior Kids House Logo">
+                </div>
+            </div>
+            <div class="business-name">
+                Junior Kids House
+                <i class="fas fa-check-circle verified"></i>
+            </div>
+            <div class="tagline">Cute & Stylish Kids Wear</div>
+            <div class="categories">
+                <span class="category-tag">Kids Clothing Store</span>
+                <span class="category-tag">Bhavnagar</span>
+                <span class="category-tag">Gujarat</span>
             </div>
         </div>
-        <div class="business-name">
-            Junior Kids House
-            <i class="fas fa-check-circle verified"></i>
-        </div>
-        <div class="tagline">Cute & Stylish Kids Wear</div>
-        <div class="categories">
-            <span class="category-tag">Kids Clothing Store</span>
-            <span class="category-tag">Bhavnagar</span>
-            <span class="category-tag">Gujarat</span>
-        </div>
+
+        <!-- Hours -->
+    <div class="hours-box">
+        <span id="shopStatus">Checking...</span>
+        <span>10:00 AM - 9:00 PM</span>
     </div>
 
-    <!-- Hours -->
-   <div class="hours-box">
-    <span id="shopStatus">Checking...</span>
-    <span>10:00 AM - 9:00 PM</span>
-</div>
+        <!-- Image Carousel -->
+        <div class="carousel-wrap">
 
-    <!-- Image Carousel -->
-    <div class="carousel-wrap">
         <div class="carousel">
+
             <div class="carousel-slide active">
-                <div class="carousel-placeholder">Store Photo 1</div>
+                <img src="img/img1.png" alt="Store Photo 1">
             </div>
+
             <div class="carousel-slide">
-                <div class="carousel-placeholder">Store Photo 2</div>
+                <img src="img/img2.png" alt="Store Photo 2">
             </div>
+
             <div class="carousel-slide">
-                <div class="carousel-placeholder">Store Photo 3</div>
+                <img src="img/img3.png" alt="Store Photo 3">
             </div>
+
         </div>
-        <button class="carousel-nav prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-        <button class="carousel-nav next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+
+        <button class="carousel-nav prev" onclick="changeSlide(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <button class="carousel-nav next" onclick="changeSlide(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
     </div>
+
     <div class="carousel-dots">
         <div class="dot active" onclick="goToSlide(0)"></div>
         <div class="dot" onclick="goToSlide(1)"></div>
         <div class="dot" onclick="goToSlide(2)"></div>
     </div>
 
-    <!-- About Us -->
-    <div class="card">
-        <div class="card-title">About Us</div>
-        <p class="about-text">
-            Junior Kids House — Cute & Stylish Kids Wear in Bhavnagar, Gujarat. 
-            We bring you the latest trends in children's fashion, from everyday casuals to party wear. 
-            Quality, comfort, and style — all at the best prices for your little ones!
-        </p>
-    </div>
-
-    <!-- Reviews -->
-    <div class="card review-card">
-        <div class="stars">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        <!-- About Us -->
+        <div class="card">
+            <div class="card-title">About Us</div>
+            <p class="about-text">
+                Junior Kids House — Cute & Stylish Kids Wear in Bhavnagar, Gujarat. 
+                We bring you the latest trends in children's fashion, from everyday casuals to party wear. 
+                Quality, comfort, and style — all at the best prices for your little ones!
+            </p>
         </div>
-        <div class="review-title">Loved our service?</div>
-        <div class="review-subtitle">Your review helps us grow and helps others choose us. ❤️</div>
-       <a href="YOUR_GOOGLE_REVIEW_LINK" target="_blank" class="google-btn">
-            <div class="google-icon">G</div>
-            Leave a Google Review
-        </a>
-    </div>
 
-    <!-- Price List CTA -->
-    <a href="price-list.pdf" target="_blank" class="cta-btn">
-        <div class="left">
-            <div class="icon-box"><i class="fas fa-images"></i></div>
-            <div>
-                <div class="sub">View Catalog / Brochure / Menu</div>
-                <div class="main">Kids Wear Price List</div>
+        <!-- Reviews -->
+        <div class="card review-card">
+            <div class="stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <div class="review-title">Loved our service?</div>
+            <div class="review-subtitle">Your review helps us grow and helps others choose us. ❤️</div>
+        <a href="YOUR_GOOGLE_REVIEW_LINK" target="_blank" class="google-btn">
+                <div class="google-icon">G</div>
+                Leave a Google Review
+            </a>
+        </div>
+
+        <!-- Price List CTA -->
+        <a href="price-list.pdf" target="_blank" class="cta-btn">
+            <div class="left">
+                <div class="icon-box"><i class="fas fa-images"></i></div>
+                <div>
+                    <div class="sub">View Catalog / Brochure / Menu</div>
+                    <div class="main">Kids Wear Price List</div>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <!-- Products & Services -->
+        <div class="section-title">Explore Our Products & Services</div>
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterItems('all', this)">✨ All</button>
+            <button class="filter-btn" onclick="filterItems('product', this)">🎒 Products</button>
+            <button class="filter-btn" onclick="filterItems('service', this)">🛠️ Services</button>
+        </div>
+
+        <div class="service-grid" id="serviceGrid">
+            <div class="service-card" data-category="product">
+                <span class="service-badge">Product</span>
+                <div class="service-name">Party Wear Dresses</div>
+                <div class="service-desc">Trendy ethnic and western party outfits for boys & girls...</div>
+                <div class="service-price">₹499 onwards</div>
+            </div>
+            <div class="service-card" data-category="product">
+                <span class="service-badge">Product</span>
+                <div class="service-name">Casual Daily Wear</div>
+                <div class="service-desc">Soft cotton t-shirts, shorts, and frocks for daily use...</div>
+                <div class="service-price">₹299 onwards</div>
+            </div>
+            <div class="service-card" data-category="product">
+                <span class="service-badge">Product</span>
+                <div class="service-name">School Uniforms</div>
+                <div class="service-desc">Premium quality school uniforms and accessories...</div>
+                <div class="service-price">₹399 onwards</div>
+            </div>
+            <div class="service-card" data-category="service">
+                <span class="service-badge service-badge-green">Service</span>
+                <div class="service-name">Custom Stitching</div>
+                <div class="service-desc">Get clothes stitched as per your design and measurements...</div>
+                <div class="service-price">₹150 onwards</div>
+            </div>
+            <div class="service-card" data-category="service">
+                <span class="service-badge service-badge-green">Service</span>
+                <div class="service-name">Alteration</div>
+                <div class="service-desc">Perfect fitting alterations for all kids garments...</div>
+                <div class="service-price">₹50 onwards</div>
+            </div>
+            <div class="service-card" data-category="service">
+                <span class="service-badge service-badge-green">Service</span>
+                <div class="service-name">Gift Wrapping</div>
+                <div class="service-desc">Beautiful gift wrapping for birthdays and special occasions...</div>
+                <div class="service-price">₹30 onwards</div>
             </div>
         </div>
-        <i class="fas fa-chevron-right"></i>
+
+        <a href="#serviceGrid" class="explore-all">
+            <i class="fas fa-desktop"></i> Explore All Offerings
+        </a>
+
+        <!-- Follow Us -->
+        <div class="section-title">Follow Us</div>
+        <div class="link-list">
+            <a href="https://www.instagram.com/junior_house_13?igsh=ZHN0YzNsZXNndjc4" target="_blank" class="link-item">
+                <div class="left">
+                    <div class="link-icon ig"><i class="fab fa-instagram"></i></div>
+                    <div class="link-text">Instagram</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            <a href="https://facebook.com/yourpage" target="_blank" class="link-item">
+                <div class="left">
+                    <div class="link-icon fb"><i class="fab fa-facebook-f"></i></div>
+                    <div class="link-text">Facebook</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+        </div>
+
+        <!-- Contact Details -->
+        <div class="section-title">Contact Details</div>
+        <div class="link-list">
+            <a href="https://wa.me/919824311313" target="_blank" class="link-item">
+                <div class="left">
+                    <div class="link-icon wa"><i class="fab fa-whatsapp"></i></div>
+                    <div class="link-text">Chat on WhatsApp</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            <a href="https://maps.app.goo.gl/eiW5fd315UNXrbAJ6" target="_blank" class="link-item">
+                <div class="left">
+                    <div class="link-icon map"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="link-text">Locate Us on Google Maps</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            <a href="tel:+919824311313" class="link-item">
+                <div class="left">
+                    <div class="link-icon call"><i class="fas fa-phone"></i></div>
+                    <div class="link-text">Call Us: +919824311313</div>
+                    
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+            <a href="mailto:email@example.com" class="link-item">
+                <div class="left">
+                    <div class="link-icon mail"><i class="fas fa-envelope"></i></div>
+                    <div class="link-text">Email Us: email@example.com</div>
+                </div>
+                <i class="fas fa-chevron-right link-arrow"></i>
+            </a>
+        </div>
+
+        <!-- Bottom Actions -->
+        <button class="btn-full btn-green" onclick="shareProfile()">
+            <i class="fas fa-share-alt"></i> Share Profile
+        </button>
+        <button class="btn-full btn-white" onclick="saveContact()">
+            <i class="fas fa-user-plus"></i> Save Contact
+        </button>
+
+        <div class="footer-text">
+            Powered by <a href="#">Junior Kids House</a>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/919824311313" target="_blank" class="fab-wa">
+        <i class="fab fa-whatsapp"></i> WhatsApp Inquiry
     </a>
 
-    <!-- Products & Services -->
-    <div class="section-title">Explore Our Products & Services</div>
-    <div class="filters">
-        <button class="filter-btn active" onclick="filterItems('all', this)">✨ All</button>
-        <button class="filter-btn" onclick="filterItems('product', this)">🎒 Products</button>
-        <button class="filter-btn" onclick="filterItems('service', this)">🛠️ Services</button>
-    </div>
+    <script>
+        function updateStatus(){
 
-    <div class="service-grid" id="serviceGrid">
-        <div class="service-card" data-category="product">
-            <span class="service-badge">Product</span>
-            <div class="service-name">Party Wear Dresses</div>
-            <div class="service-desc">Trendy ethnic and western party outfits for boys & girls...</div>
-            <div class="service-price">₹499 onwards</div>
-        </div>
-        <div class="service-card" data-category="product">
-            <span class="service-badge">Product</span>
-            <div class="service-name">Casual Daily Wear</div>
-            <div class="service-desc">Soft cotton t-shirts, shorts, and frocks for daily use...</div>
-            <div class="service-price">₹299 onwards</div>
-        </div>
-        <div class="service-card" data-category="product">
-            <span class="service-badge">Product</span>
-            <div class="service-name">School Uniforms</div>
-            <div class="service-desc">Premium quality school uniforms and accessories...</div>
-            <div class="service-price">₹399 onwards</div>
-        </div>
-        <div class="service-card" data-category="service">
-            <span class="service-badge service-badge-green">Service</span>
-            <div class="service-name">Custom Stitching</div>
-            <div class="service-desc">Get clothes stitched as per your design and measurements...</div>
-            <div class="service-price">₹150 onwards</div>
-        </div>
-        <div class="service-card" data-category="service">
-            <span class="service-badge service-badge-green">Service</span>
-            <div class="service-name">Alteration</div>
-            <div class="service-desc">Perfect fitting alterations for all kids garments...</div>
-            <div class="service-price">₹50 onwards</div>
-        </div>
-        <div class="service-card" data-category="service">
-            <span class="service-badge service-badge-green">Service</span>
-            <div class="service-name">Gift Wrapping</div>
-            <div class="service-desc">Beautiful gift wrapping for birthdays and special occasions...</div>
-            <div class="service-price">₹30 onwards</div>
-        </div>
-    </div>
+    const now = new Date();
 
-    <a href="#serviceGrid" class="explore-all">
-        <i class="fas fa-desktop"></i> Explore All Offerings
-    </a>
+    const hour = now.getHours();
 
-    <!-- Follow Us -->
-    <div class="section-title">Follow Us</div>
-    <div class="link-list">
-        <a href="https://www.instagram.com/junior_house_13?igsh=ZHN0YzNsZXNndjc4" target="_blank" class="link-item">
-            <div class="left">
-                <div class="link-icon ig"><i class="fab fa-instagram"></i></div>
-                <div class="link-text">Instagram</div>
-            </div>
-            <i class="fas fa-chevron-right link-arrow"></i>
-        </a>
-        <a href="https://facebook.com/yourpage" target="_blank" class="link-item">
-            <div class="left">
-                <div class="link-icon fb"><i class="fab fa-facebook-f"></i></div>
-                <div class="link-text">Facebook</div>
-            </div>
-            <i class="fas fa-chevron-right link-arrow"></i>
-        </a>
-    </div>
+    const status =
+    document.getElementById("shopStatus");
 
-    <!-- Contact Details -->
-    <div class="section-title">Contact Details</div>
-    <div class="link-list">
-        <a href="https://wa.me/919824311313" target="_blank" class="link-item">
-            <div class="left">
-                <div class="link-icon wa"><i class="fab fa-whatsapp"></i></div>
-                <div class="link-text">Chat on WhatsApp</div>
-            </div>
-            <i class="fas fa-chevron-right link-arrow"></i>
-        </a>
-        <a href="https://maps.app.goo.gl/eiW5fd315UNXrbAJ6" target="_blank" class="link-item">
-            <div class="left">
-                <div class="link-icon map"><i class="fas fa-map-marker-alt"></i></div>
-                <div class="link-text">Locate Us on Google Maps</div>
-            </div>
-            <i class="fas fa-chevron-right link-arrow"></i>
-        </a>
-        <a href="tel:+919824311313" class="link-item">
-            <div class="left">
-                <div class="link-icon call"><i class="fas fa-phone"></i></div>
-                <div class="link-text">Call Us: +919824311313</div>
-                
-            </div>
-            <i class="fas fa-chevron-right link-arrow"></i>
-        </a>
-        <a href="mailto:email@example.com" class="link-item">
-            <div class="left">
-                <div class="link-icon mail"><i class="fas fa-envelope"></i></div>
-                <div class="link-text">Email Us: email@example.com</div>
-            </div>
-            <i class="fas fa-chevron-right link-arrow"></i>
-        </a>
-    </div>
+    if(hour >= 10 && hour < 21){
 
-    <!-- Bottom Actions -->
-    <button class="btn-full btn-green" onclick="shareProfile()">
-        <i class="fas fa-share-alt"></i> Share Profile
-    </button>
-    <button class="btn-full btn-white" onclick="saveContact()">
-        <i class="fas fa-user-plus"></i> Save Contact
-    </button>
+    status.innerHTML = "🟢 Open Now";
 
-    <div class="footer-text">
-        Powered by <a href="#">Junior Kids House</a>
-    </div>
-</div>
+    }else{
 
-<!-- Floating WhatsApp -->
-<a href="https://wa.me/919824311313" target="_blank" class="fab-wa">
-    <i class="fab fa-whatsapp"></i> WhatsApp Inquiry
-</a>
+    status.innerHTML = "🔴 Closed Now";
 
-<script>
-    function updateStatus(){
-
-const now = new Date();
-
-const hour = now.getHours();
-
-const status =
-document.getElementById("shopStatus");
-
-if(hour >= 10 && hour < 21){
-
-status.innerHTML = "🟢 Open Now";
-
-}else{
-
-status.innerHTML = "🔴 Closed Now";
-
-}
-
-}
-
-updateStatus();
-    // ===================== CAROUSEL =====================
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
-    let autoSlideInterval;
-    
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-            dots[i].classList.toggle('active', i === index);
-        });
-    }
-    function changeSlide(dir) {
-        currentSlide = (currentSlide + dir + slides.length) % slides.length;
-        showSlide(currentSlide);
-        resetAutoSlide();
-    }
-    function goToSlide(index) {
-        currentSlide = index;
-        showSlide(currentSlide);
-        resetAutoSlide();
-    }
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
-    function resetAutoSlide() {
-        clearInterval(autoSlideInterval);
-        autoSlideInterval = setInterval(nextSlide, 4000);
-    }
-    // Start auto-slide
-    resetAutoSlide();
-
-    // ===================== TOAST =====================
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
     }
 
-    // ===================== SHARE PROFILE =====================
-   async function shareProfile(){
+    }
 
-const url =
-window.location.href;
-
-try{
-
-if(navigator.share){
-
-await navigator.share({
-title:"Junior Kids House",
-text:"Cute & Stylish Kids Wear",
-url:url
-});
-
-}else{
-
-await navigator.clipboard.writeText(url);
-
-showToast("Link copied!");
-
-}
-
-}catch(err){
-
-navigator.clipboard.writeText(url);
-
-showToast("Link copied!");
-
-}
-
-}
-    // ===================== FILTER PRODUCTS/SERVICES =====================
-    function filterItems(category, btn) {
-        // Update active button
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    updateStatus();
+        // ===================== CAROUSEL =====================
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+        let autoSlideInterval;
         
-        // Filter cards
-        const cards = document.querySelectorAll('.service-card');
-        cards.forEach(card => {
-            if (category === 'all' || card.dataset.category === category) {
-                card.classList.remove('hidden');
-                card.style.animation = 'fadeIn 0.4s ease';
-            } else {
-                card.classList.add('hidden');
-            }
-        });
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+                dots[i].classList.toggle('active', i === index);
+            });
+        }
+        function changeSlide(dir) {
+            currentSlide = (currentSlide + dir + slides.length) % slides.length;
+            showSlide(currentSlide);
+            resetAutoSlide();
+        }
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+            resetAutoSlide();
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(nextSlide, 4000);
+        }
+        // Start auto-slide
+        resetAutoSlide();
+
+        // ===================== TOAST =====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // ===================== SHARE PROFILE =====================
+    async function shareProfile(){
+
+    const url =
+    window.location.href;
+
+    try{
+
+    if(navigator.share){
+
+    await navigator.share({
+    title:"Junior Kids House",
+    text:"Cute & Stylish Kids Wear",
+    url:url
+    });
+
+    }else{
+
+    await navigator.clipboard.writeText(url);
+
+    showToast("Link copied!");
+
     }
 
-    // ===================== SAVE CONTACT =====================
-    function saveContact() {
-        const vCard = `BEGIN:VCARD
-VERSION:3.0
-FN:Junior Kids House
-ORG:Junior Kids House
-TITLE:Cute & Stylish Kids Wear
-TEL;TYPE=CELL:+919824311313
-EMAIL:email@example.com
-ADR;TYPE=WORK:;;Bhavnagar;Gujarat;India
-URL:https://yourwebsite.com
-END:VCARD`;
-        
-        const blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'Junior-Kids-House.vcf';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        showToast('Contact saved!');
-    }
-</script>
+    }catch(err){
 
-</body>
-</html>'''
+    navigator.clipboard.writeText(url);
+
+    showToast("Link copied!");
+
+    }
+
+    }
+        // ===================== FILTER PRODUCTS/SERVICES =====================
+        function filterItems(category, btn) {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Filter cards
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.classList.remove('hidden');
+                    card.style.animation = 'fadeIn 0.4s ease';
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // ===================== SAVE CONTACT =====================
+        function saveContact() {
+            const vCard = `BEGIN:VCARD
+    VERSION:3.0
+    FN:Junior Kids House
+    ORG:Junior Kids House
+    TITLE:Cute & Stylish Kids Wear
+    TEL;TYPE=CELL:+919824311313
+    EMAIL:email@example.com
+    ADR;TYPE=WORK:;;Bhavnagar;Gujarat;India
+    URL:https://yourwebsite.com
+    END:VCARD`;
+            
+            const blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Junior-Kids-House.vcf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Contact saved!');
+        }
+    </script>
+
+    </body>
+    </html>'''
 
