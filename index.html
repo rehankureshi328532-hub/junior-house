@@ -656,11 +656,32 @@
             </div>
             <div class="review-title">Loved our service?</div>
             <div class="review-subtitle">Your review helps us grow and helps others choose us. ❤️</div>
-        <a href="YOUR_GOOGLE_REVIEW_LINK" target="_blank" class="google-btn">
+        <a href="https://www.google.com/search?q=Junior+House+Bhavnagar" target="_blank" class="google-btn">
                 <div class="google-icon">G</div>
                 Leave a Google Review
             </a>
         </div>
+        <div class="card">
+    <div class="card-title">Payment</div>
+
+    <div style="text-align:center">
+
+        <img src="pyment.jpeg"
+             alt="UPI QR"
+             style="width:220px;border-radius:12px;">
+
+        <p style="margin-top:12px;font-weight:600;">
+            UPI ID: 9824311313@ybl
+        </p>
+
+        <button class="btn-full btn-green"
+                onclick="copyUPI()"
+                style="margin-top:10px;width:100%;">
+            Copy UPI ID
+        </button>
+
+    </div>
+</div>
 
         <!-- Price List CTA -->
         <a href="price-list.pdf" target="_blank" class="cta-btn">
@@ -718,7 +739,7 @@
                 </div>
                 <i class="fas fa-chevron-right link-arrow"></i>
             </a>
-            <a href="https://facebook.com/yourpage" target="_blank" class="link-item">
+            <a href="https://www.facebook.com/share/18TFjkTxgP/" target="_blank" class="link-item">
                 <div class="left">
                     <div class="link-icon fb"><i class="fab fa-facebook-f"></i></div>
                     <div class="link-text">Facebook</div>
@@ -752,10 +773,10 @@
                 </div>
                 <i class="fas fa-chevron-right link-arrow"></i>
             </a>
-            <a href="mailto:email@example.com" class="link-item">
+            <a href="mailto:mubinkureshi1313@gmail.com" class="link-item">
                 <div class="left">
                     <div class="link-icon mail"><i class="fas fa-envelope"></i></div>
-                    <div class="link-text">Email Us: email@example.com</div>
+                    <div class="link-text">Email Us: mubinkureshi1313@gmail.com</div>
                 </div>
                 <i class="fas fa-chevron-right link-arrow"></i>
             </a>
@@ -770,7 +791,7 @@
         </button>
 
         <div class="footer-text">
-            Powered by <a href="#">Junior Kids House</a>
+            Powered by <a href="#">Junior  House</a>
         </div>
     </div>
 
@@ -918,8 +939,13 @@
             URL.revokeObjectURL(url);
             showToast('Contact saved!');
         }
+
+    function copyUPI(){
+    navigator.clipboard.writeText("9824311313@ybl");
+    showToast("UPI ID copied!");
+}
     </script>
 
     </body>
-    </html>'''
+    </html>
 
